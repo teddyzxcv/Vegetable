@@ -8,36 +8,46 @@ namespace Vegetable
 
         static void AddContainer(string InputLine, ref int index)
         {
-            Random rn = new Random();
-            string[] InputInfo = InputLine.Split("->");
-            int SumNumber = int.Parse(InputInfo[0]);
-            string[] BoxListInfo = InputInfo[1].Split(';');
-            Container container = new Container(rn.Next(0, 50), rn.Next(50, 1000), index);
-            if (!InputLine.Contains("->") || !InputLine.Contains(',') || SumNumber != BoxListInfo.Length)
-                throw new Exception();
-            for (int i = 0; i < SumNumber; i++)
+            try
             {
-                if (BoxListInfo[i].Split(',').Length != 2)
+                Random rn = new Random();
+                string[] InputInfo = InputLine.Split("->");
+                int SumNumber = int.Parse(InputInfo[0]);
+                string[] BoxListInfo = InputInfo[1].Split(';');
+                Container container = new Container(rn.Next(0, 50), rn.Next(50, 1000), index);
+                if (!InputLine.Contains("->") || !InputLine.Contains(',') || SumNumber != BoxListInfo.Length)
                     throw new Exception();
-                double boxmass = double.Parse(BoxListInfo[i].Split(',')[0]);
-                double boxcost = double.Parse(BoxListInfo[i].Split(',')[1]);
-                Box box = new Box(boxmass, boxcost);
-                container.BoxList.Add(box);
-                if (!(container.CurrentMass < container.MaxMass))
+                for (int i = 0; i < SumNumber; i++)
                 {
-                    if (container.CurrentMass == container.MaxMass)
-                        return;
-                    else
+                    if (BoxListInfo[i].Split(',').Length != 2)
+                        throw new Exception();
+                    double boxmass = double.Parse(BoxListInfo[i].Split(',')[0]);
+                    double boxcost = double.Parse(BoxListInfo[i].Split(',')[1]);
+                    Box box = new Box(boxmass, boxcost);
+                    container.BoxList.Add(box);
+                    if (!(container.CurrentMass < container.MaxMass))
                     {
-                        container.BoxList.RemoveAt(container.BoxList.Count - 1);
-                        return;
+                        Console.WriteLine("Cant Add");
+                        if (container.CurrentMass == container.MaxMass)
+                            return;
+                        else
+                        {
+                            container.BoxList.RemoveAt(container.BoxList.Count - 1);
+                        }
                     }
+
                 }
+                index += 1;
+                container.Index = index;
+                if (Warehouse.Capacity == Warehouse.ContainerList.Count)
+                    Warehouse.ContainerList.RemoveAt(0);
+                if (Warehouse.CheckCost(container))
+                    Warehouse.ContainerList.Add(container);
             }
-            index += 1;
-            container.Index = index;
-            if (Warehouse.CheckCost(container))
-                Warehouse.ContainerList.Add(container);
+            catch
+            {
+                Console.WriteLine("Incorrect input!!");
+            }
         }
 
         static void DeleteContainer()
@@ -71,6 +81,44 @@ namespace Vegetable
             {
 
             }
+            else
+                throw new Exception();
+        }
+        static void FileAddDelete()
+        {
+            try
+            {
+
+                string[] WarehouseInfo = File.ReadAllLines(@"FileInput\WarehouseInfo.txt");
+                string[] ContainerInfo = File.ReadAllLines(@"FileInput\ContainerInfo.txt");
+                string[] OperationInfo = File.ReadAllLines(@"FileInput\OperationInfo.txt");
+
+                if (WarehouseInfo.Length == 2 && ContainerInfo.Length == OperationInfo.Length)
+                {
+                    Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
+                    Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
+                    for (int i = 0; i < ContainerInfo.Length; i++)
+                    {
+                        if (OperationInfo[i] == "+")
+                        {
+                            AddContainer(ContainerInfo[i], ref ContainerIndex);
+                        }
+                        else if (OperationInfo[i] == "-")
+                        {
+
+                        }
+                        else
+                            throw new Exception();
+                    }
+                    PrintWarehouseInfo(Warehouse.ContainerList);
+                }
+                else
+                    throw new Exception();
+            }
+            catch
+            {
+                Console.WriteLine("Incorrect input!");
+            }
         }
         static void Main(string[] args)
         {
@@ -83,21 +131,7 @@ namespace Vegetable
                     string OperationInput = Console.ReadLine();
                     if (OperationInput == "file")
                     {
-                        string[] WarehouseInfo = File.ReadAllLines("WarehouseInfo.txt");
-                        string[] ContainerInfo = File.ReadAllLines("ContainerInfo.txt");
-                        string[] OperationInfo = File.ReadAllLines("OperationInfo.txt");
-                        if (WarehouseInfo.Length == 2)
-                        {
-                            Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
-                            Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
-                        }
-                        else
-                            throw new Exception();
-                        if (ContainerInfo.Length == OperationInfo.Length)
-                        {
-                        }
-                        else
-                            throw new Exception();
+                        FileAddDelete();
                     }
                     else
                     if (OperationInput == "console")
