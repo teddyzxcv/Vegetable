@@ -17,7 +17,7 @@ namespace Vegetable
         }
         public override string ToString()
         {
-            string Output = $"Mass:{this.Mass}; Cost per kilogram:{this.CostPerKilo}; Sum cost:{this.SumCost}\n";
+            string Output = $"Mass: {this.Mass}; Cost per kilogram: {this.CostPerKilo}; Sum cost: {this.SumCost}\n";
             return Output;
         }
 

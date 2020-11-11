@@ -53,11 +53,12 @@ namespace Vegetable
 
         public override string ToString()
         {
-            string Output = $"Container index[{this.Index}]:\n   Damage Level:{this.DamageLevel}; Maximum mass:{this.MaxMass}; Current mass:{this.CurrentMass}\n";
-            Output += $"  Sum cost:{this.SumCost}\nList of boxes:\n";
+            string Output = "-------------------------------------------------------\n";
+            Output += $"| Container index[{this.Index}]:\n| Damage Level:{this.DamageLevel / 100}; Maximum mass:{this.MaxMass}; Current mass:{this.CurrentMass} \n";
+            Output += $"| Sum cost:{this.SumCost}         \nList of boxes:\n";
             for (int i = 0; i < this.BoxList.Count; i++)
             {
-                Output += this.BoxList[i].ToString();
+                Output += "-> " + this.BoxList[i].ToString();
             }
             return Output;
         }
