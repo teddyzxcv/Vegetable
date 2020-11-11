@@ -1,12 +1,22 @@
+using System;
+using System.Collections.Generic;
 namespace Vegetable
 {
     public static class Warehouse
     {
-        static int CostPerContainer;
-        static int Capacity;
+        static public double CostPerContainer { get; set; }
 
-        static bool CheckCost(){
-                
+        static public int Capacity { get; set; }
+
+        static public List<Container> ContainerList = new List<Container>();
+
+
+        static public bool CheckCost(Container container)
+        {
+            if (container.SumCost <= CostPerContainer)
+                return false;
+            else
+                return true;
         }
     }
 }
