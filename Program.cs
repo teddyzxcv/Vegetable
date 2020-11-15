@@ -5,11 +5,14 @@ namespace Vegetable
 {
     class Program
     {
+        public static string ErrorMessage;
+        static int ContainerExcluded = 0;
 
         public static void AddContainer(string InputLine, ref int index)
         {
             try
             {
+                int BoxExcluded = 0;
                 Random rn = new Random();
                 string[] InputInfo = InputLine.Split("->");
                 int SumNumber = int.Parse(InputInfo[0]);
@@ -27,26 +30,44 @@ namespace Vegetable
                     container.BoxList.Add(box);
                     if (!(container.CurrentMass < container.MaxMass))
                     {
-                        Console.WriteLine("Cant Add");
+
                         if (container.CurrentMass == container.MaxMass)
+                        {
+                            ErrorMessage = "Can't add more box, because limit of container was reached";
                             return;
+                        }
+
                         else
                         {
                             container.BoxList.RemoveAt(container.BoxList.Count - 1);
+                            BoxExcluded++;
                         }
                     }
 
                 }
                 index += 1;
                 container.Index = index;
+                if (BoxExcluded != 0)
+                    if (BoxExcluded != SumNumber)
+                        ErrorMessage += $"Can't add more box in the Container N.{index}, because limit of container was reached,\n {BoxExcluded} boxes wasn't put into the container.\n";
+                    else
+                        ErrorMessage += $"Can't add Container N.{index}, because no box can't be add into the container(they are all so heavy).\n";
                 if (Warehouse.Capacity == Warehouse.ContainerList.Count)
+                {
                     Warehouse.ContainerList.RemoveAt(0);
+                    ContainerExcluded++;
+                }
                 if (Warehouse.CheckCost(container))
                     Warehouse.ContainerList.Add(container);
+                else
+                if (BoxExcluded != SumNumber)
+                    ErrorMessage += $"Container N.{index} can't put into the warehouse, because cost of container is less than cost of rent in warehouse\n";
+
+
             }
             catch
             {
-                Console.WriteLine("Incorrect input!!");
+                ErrorMessage = "Incorrect console input!!!";
             }
         }
 
@@ -62,36 +83,8 @@ namespace Vegetable
             }
         }
 
-        static void PrintWarehouseInfo(List<Container> containers)
-        {
-            Console.WriteLine($"Warehouse capacity: {Warehouse.Capacity}");
-            Console.WriteLine($"Cost per container: {Warehouse.CostPerContainer}");
-            Console.WriteLine($"Amount of container: {Warehouse.ContainerList.Count}");
-            for (int i = 0; i < containers.Count; i++)
-            {
-                Console.WriteLine(containers[i]);
-            }
-        }
         public static int ContainerIndex = 0;
-        static void ConsoleAddDelete()
-        {
 
-            Console.Write("Choose operation: ");
-            string Operation = Console.ReadLine();
-            if (Operation == "+")
-            {
-                Console.Write("Input container info: ");
-                AddContainer(Console.ReadLine(), ref ContainerIndex);
-                PrintWarehouseInfo(Warehouse.ContainerList);
-            }
-            else if (Operation == "-")
-            {
-                int DelIndex = int.Parse(Console.ReadLine());
-                DeleteContainer(DelIndex);
-            }
-            else
-                throw new Exception();
-        }
         public static void FileAddDelete()
         {
             try
@@ -102,7 +95,7 @@ namespace Vegetable
                 string[] WarehouseInfo = File.ReadAllLines(@"FileInput\WarehouseInfo.txt");
                 if (WarehouseInfo.Length == 2 && ContainerInfo.Length == OperationInfo.Length)
                 {
-
+                    ContainerExcluded = 0;
                     for (int i = 0; i < ContainerInfo.Length; i++)
                     {
                         if (OperationInfo[i] == "+")
@@ -116,14 +109,16 @@ namespace Vegetable
                         else
                             throw new Exception();
                     }
-                    PrintWarehouseInfo(Warehouse.ContainerList);
                 }
                 else
                     throw new Exception();
+                if (ContainerExcluded != 0)
+                    ErrorMessage = $"{ContainerExcluded} have been excluded due the lack of space in warehouse.";
+
             }
             catch
             {
-                Console.WriteLine("Incorrect input!");
+                ErrorMessage = "Incorrect file input!!!";
             }
         }
         static void InputWarehouseInfo()
@@ -163,12 +158,13 @@ namespace Vegetable
                         ShowCase = Warehouse.ContainerList[Menu.InMenuChoosenOne].ShowcaseMessage();
                     else
                         ShowCase = "";
-                    Menu.PrintOutUpAndDown(ShowCase);
+                    Menu.PrintOutUpAndDown(ShowCase, ErrorMessage);
+                    ErrorMessage = "";
                     Menu.MenuControl(out ExitCode);
                 }
                 catch
                 {
-                    Console.WriteLine("Incorrect input!!!");
+                    ErrorMessage = "Something went wrong, plz try again...";
                 }
             } while (!ExitCode);
 

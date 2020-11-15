@@ -15,14 +15,14 @@ namespace Vegetable
         public static void InitailizeMenu()
         {
             MenuEndPoint = false;
-            Menu.OutMenuList = new List<string>() { $"Warehouse\nCapacity: {Warehouse.Capacity}\nCost per container: {Warehouse.CostPerContainer}", "Container" };
+            Menu.OutMenuList = new List<string>() { $"Warehouse\nCapacity: {Warehouse.Capacity} Container\nCost per container: {Warehouse.CostPerContainer}Rub", "Container" };
             Menu.InMenuChoosenOne = 0;
             Menu.OutMenuChoosenOne = 0;
             Console.BackgroundColor = ConsoleColor.Black;
             Menu.CurrentMenuList = Warehouse.ContainerList.ConvertAll(new Converter<Container, string>(Warehouse.CotainerToIndex));
         }
 
-        public static void PrintOutUpAndDown(string ShowCaseMessage)
+        public static void PrintOutUpAndDown(string ShowCaseMessage, string ErrorMessage)
         {
             Console.WriteLine(OutMenuList[OutMenuChoosenOne] + "    Press ESC to exit program...");
             Console.WriteLine("------------------------------------------");
@@ -44,7 +44,12 @@ namespace Vegetable
                     Console.WriteLine($"  {CurrentMenuList[i]}");
                 }
             }
+            Console.BackgroundColor = ConsoleColor.Blue;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(ShowCaseMessage);
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
+            Console.WriteLine(ErrorMessage);
         }
 
         public static void GetInToMenu()
@@ -69,8 +74,6 @@ namespace Vegetable
             }
 
         }
-
-
 
         public static void MenuControl(out bool ExitCode)
         {

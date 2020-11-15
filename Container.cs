@@ -54,8 +54,8 @@ namespace Vegetable
         public override string ToString()
         {
             string Output = "-------------------------------------------------------\n";
-            Output += $"| Container index[{this.Index}]:\n| Damage Level:{this.DamageLevel / 100}; Maximum mass:{this.MaxMass}; Current mass:{this.CurrentMass} \n";
-            Output += $"| Sum cost:{this.SumCost}         \nList of boxes:\n";
+            Output += $"| Container N.{this.Index}:\n| Damage Level: {this.DamageLevel / 100}; Maximum mass: {this.MaxMass}kg; Current mass: {this.CurrentMass}kg \n";
+            Output += $"| Sum cost: {this.SumCost}Rub         \nList of boxes:\n";
             for (int i = 0; i < this.BoxList.Count; i++)
             {
                 Output += "-> " + this.BoxList[i].ToString();
@@ -64,7 +64,7 @@ namespace Vegetable
         }
         public string ShowcaseMessage()
         {
-            return $">>>Sum cost:{this.SumCost} Damage Level:{this.DamageLevel / 100};\n>>>Maximum mass:{this.MaxMass}; Current mass:{this.CurrentMass}";
+            return $">>>Sum cost: {this.SumCost}Rub; Damage Level: {this.DamageLevel / 100};\n>>>Maximum mass: {this.MaxMass}kg; Current mass: {this.CurrentMass}kg";
         }
 
 
