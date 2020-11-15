@@ -89,10 +89,21 @@ namespace Vegetable
         {
             try
             {
-
-                string[] ContainerInfo = File.ReadAllLines(@"FileInput\ContainerInfo.txt");
-                string[] OperationInfo = File.ReadAllLines(@"FileInput\OperationInfo.txt");
-                string[] WarehouseInfo = File.ReadAllLines(@"FileInput\WarehouseInfo.txt");
+                Console.WriteLine("At OperationInfo: For each line: '+' to add a container,'-' to delete a container");
+                Console.WriteLine("At ContainerInfo: For each line: if line in 'OperationInfo' are '+', then info of container must write in format:");
+                Console.WriteLine("Example:        2->2,3;4,10 ");
+                Console.WriteLine("                ^  ^ ^ ^-^");
+                Console.WriteLine("                |  | |  |");
+                Console.WriteLine("  Numbers of boxes | |  |");
+                Console.WriteLine("     Mass of one box |  |");
+                Console.WriteLine("     Cost per kilogram  |");
+                Console.WriteLine("Other boxes in the same format");
+                Console.WriteLine("if line are '-', then just the N. of container that need to delete. All line and opertation must correspond each other.");
+                Console.WriteLine("In the folder 'FileInput' has all example, plz, change the file there and press enter..");
+                Console.ReadKey(true);
+                string[] ContainerInfo = File.ReadAllLines(@"FileInput" + Path.DirectorySeparatorChar + "ContainerInfo.txt");
+                string[] OperationInfo = File.ReadAllLines(@"FileInput" + Path.DirectorySeparatorChar + "OperationInfo.txt");
+                string[] WarehouseInfo = File.ReadAllLines(@"FileInput" + Path.DirectorySeparatorChar + "WarehouseInfo.txt");
                 if (WarehouseInfo.Length == 2 && ContainerInfo.Length == OperationInfo.Length)
                 {
                     ContainerExcluded = 0;
@@ -113,7 +124,7 @@ namespace Vegetable
                 else
                     throw new Exception();
                 if (ContainerExcluded != 0)
-                    ErrorMessage = $"{ContainerExcluded} have been excluded due the lack of space in warehouse.";
+                    ErrorMessage += $"{ContainerExcluded} have been excluded due the lack of space in warehouse.";
 
             }
             catch
@@ -127,18 +138,21 @@ namespace Vegetable
             string OperationInput = Console.ReadLine();
             if (OperationInput == "console")
             {
-                Console.Write("Input warhouse capacity: ");
+                Console.Write("Input warehouse capacity: ");
                 Warehouse.Capacity = int.Parse(Console.ReadLine());
-                Console.Write("Input warhouse cost per container: ");
+                Console.Write("Input warehouse cost per container: ");
                 Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
             }
             else
             if (OperationInput == "file")
             {
-                string[] WarehouseInfo = File.ReadAllLines(@"FileInput\WarehouseInfo.txt");
+                Console.WriteLine("You may change the file 'WarehouseInfo.txt'");
+                Console.WriteLine("At WarehouseInfo: First line: Capacity of warehouse, second line: Cost per container");
+                Console.WriteLine("Example of file are in the folder 'FileInput', plz, change the FILE IN THE FOLDER and press enter.");
+                Console.ReadKey(true);
+                string[] WarehouseInfo = File.ReadAllLines($"FileInput{Path.DirectorySeparatorChar}WarehouseInfo.txt");
                 Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
                 Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
-                FileAddDelete();
             }
 
         }
