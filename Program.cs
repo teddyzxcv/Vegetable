@@ -91,8 +91,8 @@ namespace Vegetable
         {
             try
             {
-                Console.WriteLine("At OperationInfo: For each line: '+' to add a container,'-' to delete a container");
-                Console.WriteLine("At ContainerInfo: For each line: if line in 'OperationInfo' are '+', then info of container must write in format:");
+                Console.WriteLine("At Operation Info: For each line: '+' to add a container,'-' to delete a container");
+                Console.WriteLine("At Container Info: For each line: if line in 'OperationInfo' are '+', then info of container must write in format:");
                 Console.WriteLine("Example:        2->2,3;4,10 ");
                 Console.WriteLine("                ^  ^ ^ ^-^");
                 Console.WriteLine("                |  | |  |");
@@ -101,12 +101,12 @@ namespace Vegetable
                 Console.WriteLine("     Cost per kilogram  |");
                 Console.WriteLine("Other boxes in the same format");
                 Console.WriteLine("if line are '-', then just the N. of container that need to delete. All line and opertation must correspond each other.");
-                Console.WriteLine("In the folder 'FileInput' has all example, plz, change the file there and press enter..");
-                Console.ReadKey(true);
-                string[] ContainerInfo = File.ReadAllLines(@"FileInput" + Path.DirectorySeparatorChar + "ContainerInfo.txt");
-                string[] OperationInfo = File.ReadAllLines(@"FileInput" + Path.DirectorySeparatorChar + "OperationInfo.txt");
-                string[] WarehouseInfo = File.ReadAllLines(@"FileInput" + Path.DirectorySeparatorChar + "WarehouseInfo.txt");
-                if (WarehouseInfo.Length == 2 && ContainerInfo.Length == OperationInfo.Length)
+                Console.WriteLine("In the folder 'FileInput' has all example.");
+                Console.Write("Plz, input path with operation info: ");
+                string[] OperationInfo = File.ReadAllLines(Console.ReadLine());
+                Console.Write("Plz, input path with container info: ");
+                string[] ContainerInfo = File.ReadAllLines(Console.ReadLine());
+                if (ContainerInfo.Length == OperationInfo.Length)
                 {
                     ContainerExcluded = 0;
                     for (int i = 0; i < ContainerInfo.Length; i++)
@@ -153,13 +153,17 @@ namespace Vegetable
                     else
                     if (OperationInput == "file")
                     {
-                        Console.WriteLine("You may change the file 'WarehouseInfo.txt'");
-                        Console.WriteLine("At WarehouseInfo: First line: Capacity of warehouse, second line: Cost per container");
-                        Console.WriteLine("Example of file are in the folder 'FileInput', plz, change the FILE IN THE FOLDER and press enter.");
-                        Console.ReadKey(true);
-                        string[] WarehouseInfo = File.ReadAllLines($"FileInput{Path.DirectorySeparatorChar}WarehouseInfo.txt");
+                        Console.WriteLine("You must input path of txt file with these infomation:");
+                        Console.WriteLine("Warehouse Info: First line: Capacity of warehouse, second line: Cost per container");
+                        Console.WriteLine("Example of file are in the folder 'FileInput'.");
+                        Console.Write("Input Path: ");
+                        string[] WarehouseInfo = File.ReadAllLines(Console.ReadLine());
                         Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
                         Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
+                    }
+                    if (Warehouse.Capacity == 0)
+                    {
+                        Console.WriteLine("Warehouse capacity must > 0 !!!");
                     }
                 }
                 catch
