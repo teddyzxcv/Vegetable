@@ -54,8 +54,10 @@ namespace Vegetable
                         ErrorMessage += $"Can't add Container N.{index}, because no box can't be add into the container(they are all so heavy).\n";
                 if (Warehouse.Capacity == Warehouse.ContainerList.Count)
                 {
+                    Warehouse.SortBy(0);
                     Warehouse.ContainerList.RemoveAt(0);
                     ContainerExcluded++;
+                    Warehouse.SortBy(Menu.CurrentSortBy);
                 }
                 if (Warehouse.CheckCost(container))
                     Warehouse.ContainerList.Add(container);
