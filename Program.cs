@@ -6,7 +6,7 @@ namespace Vegetable
     class Program
     {
 
-        static void AddContainer(string InputLine, ref int index)
+        public static void AddContainer(string InputLine, ref int index)
         {
             try
             {
@@ -50,7 +50,7 @@ namespace Vegetable
             }
         }
 
-        static void DeleteContainer(int delIndex)
+        public static void DeleteContainer(int delIndex)
         {
             for (int i = 0; i < Warehouse.ContainerList.Count; i++)
             {
@@ -72,7 +72,7 @@ namespace Vegetable
                 Console.WriteLine(containers[i]);
             }
         }
-        static int ContainerIndex = 0;
+        public static int ContainerIndex = 0;
         static void ConsoleAddDelete()
         {
 
@@ -92,19 +92,17 @@ namespace Vegetable
             else
                 throw new Exception();
         }
-        static void FileAddDelete()
+        public static void FileAddDelete()
         {
             try
             {
 
-                string[] WarehouseInfo = File.ReadAllLines(@"FileInput\WarehouseInfo.txt");
                 string[] ContainerInfo = File.ReadAllLines(@"FileInput\ContainerInfo.txt");
                 string[] OperationInfo = File.ReadAllLines(@"FileInput\OperationInfo.txt");
-
+                string[] WarehouseInfo = File.ReadAllLines(@"FileInput\WarehouseInfo.txt");
                 if (WarehouseInfo.Length == 2 && ContainerInfo.Length == OperationInfo.Length)
                 {
-                    Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
-                    Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
+
                     for (int i = 0; i < ContainerInfo.Length; i++)
                     {
                         if (OperationInfo[i] == "+")
@@ -130,41 +128,49 @@ namespace Vegetable
         }
         static void InputWarehouseInfo()
         {
-            Console.Write("Input warhouse capacity: ");
-            Warehouse.Capacity = int.Parse(Console.ReadLine());
-            Console.Write("Input warhouse cost per container: ");
-            Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
+            Console.Write("Input method(file or console): ");
+            string OperationInput = Console.ReadLine();
+            if (OperationInput == "console")
+            {
+                Console.Write("Input warhouse capacity: ");
+                Warehouse.Capacity = int.Parse(Console.ReadLine());
+                Console.Write("Input warhouse cost per container: ");
+                Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
+            }
+            else
+            if (OperationInput == "file")
+            {
+                string[] WarehouseInfo = File.ReadAllLines(@"FileInput\WarehouseInfo.txt");
+                Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
+                Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
+                FileAddDelete();
+            }
+
         }
         static void Main(string[] args)
         {
-            Console.BackgroundColor = ConsoleColor.Black;
+            bool ExitCode = false;
+            InputWarehouseInfo();
+            Menu.InitailizeMenu();
+
             do
             {
+                Console.Clear();
                 try
                 {
-                    Console.Write("Input method: ");
-                    string OperationInput = Console.ReadLine();
-                    if (OperationInput == "file")
-                    {
-                        FileAddDelete();
-                    }
+                    string ShowCase;
+                    if (Menu.OutMenuChoosenOne == 0 && Warehouse.ContainerList.Count != 0)
+                        ShowCase = Warehouse.ContainerList[Menu.InMenuChoosenOne].ShowcaseMessage();
                     else
-                    if (OperationInput == "console")
-                    {
-                        if (Warehouse.Capacity != 0)
-                            InputWarehouseInfo();
-                        do
-                        {
-                            ConsoleAddDelete();
-                            Console.WriteLine("Press Enter to continue, press ESC to leave...");
-                        } while (Console.ReadKey().Key != ConsoleKey.Escape);
-                    }
+                        ShowCase = "";
+                    Menu.PrintOutUpAndDown(ShowCase);
+                    Menu.MenuControl(out ExitCode);
                 }
                 catch
                 {
                     Console.WriteLine("Incorrect input!!!");
                 }
-            } while (true);
+            } while (!ExitCode);
 
         }
     }

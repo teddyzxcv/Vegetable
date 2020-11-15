@@ -9,6 +9,10 @@ namespace Vegetable
         static public int Capacity { get; set; }
 
         static public List<Container> ContainerList = new List<Container>();
+        static public string CotainerToIndex(Container c)
+        {
+            return "Container N." + c.Index.ToString();
+        }
 
 
         static public bool CheckCost(Container container)

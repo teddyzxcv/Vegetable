@@ -62,6 +62,10 @@ namespace Vegetable
             }
             return Output;
         }
+        public string ShowcaseMessage()
+        {
+            return $">>>Sum cost:{this.SumCost} Damage Level:{this.DamageLevel / 100};\n>>>Maximum mass:{this.MaxMass}; Current mass:{this.CurrentMass}";
+        }
 
 
 
