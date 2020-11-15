@@ -8,31 +8,24 @@
     ".NETCoreApp,Version=v3.1": []
   },
   "packageFolders": {
-    "C:\\Users\\teddyzxcv\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\pan26\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\Vegetable.csproj",
+      "projectUniqueName": "C:\\Users\\pan26\\Documents\\GitHub\\Vegetable\\Vegetable.csproj",
       "projectName": "Vegetable",
-      "projectPath": "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\Vegetable.csproj",
-      "packagesPath": "C:\\Users\\teddyzxcv\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\obj\\",
+      "projectPath": "C:\\Users\\pan26\\Documents\\GitHub\\Vegetable\\Vegetable.csproj",
+      "packagesPath": "C:\\Users\\pan26\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pan26\\Documents\\GitHub\\Vegetable\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\teddyzxcv\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\pan26\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -63,7 +56,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
       }
     }
   }

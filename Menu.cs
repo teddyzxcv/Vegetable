@@ -110,7 +110,7 @@ namespace Vegetable
                             InMenuChoosenOne++;
                     break;
                 case (ConsoleKey.RightArrow):
-                    if (OutMenuChoosenOne < OutMenuList.Count - 1)
+                    if (OutMenuChoosenOne < OutMenuList.Count - 1 && CurrentMenuList.Count != 0)
                     {
                         if (!MenuEndPoint)
                         {
@@ -119,7 +119,7 @@ namespace Vegetable
                             InMenuChoosenOne = 0;
                         }
                     }
-                    else if (OutMenuChoosenOne == 2)
+                    else if (OutMenuChoosenOne == 2 && CurrentMenuList.Count != 0)
                     {
                         CurrentSortBy = InMenuChoosenOne;
                         Warehouse.SortBy(InMenuChoosenOne);
@@ -130,7 +130,7 @@ namespace Vegetable
 
                     break;
                 case (ConsoleKey.LeftArrow):
-                    if (OutMenuChoosenOne != 0)
+                    if (OutMenuChoosenOne != 0 && CurrentMenuList.Count != 0)
                     {
                         if (OutMenuChoosenOne != 2)
                         {
@@ -165,7 +165,8 @@ namespace Vegetable
                 case (ConsoleKey.D):
                     Program.DeleteContainer(Warehouse.ContainerList[InMenuChoosenOne].Index);
                     CurrentMenuList = Warehouse.ContainerList.ConvertAll(new Converter<Container, string>(Warehouse.CotainerToIndex));
-                    InMenuChoosenOne--;
+                    if (InMenuChoosenOne != 0)
+                        InMenuChoosenOne--;
                     break;
                 case (ConsoleKey.F):
                     Program.FileAddDelete();

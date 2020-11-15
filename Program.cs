@@ -136,30 +136,44 @@ namespace Vegetable
         }
         static void InputWarehouseInfo()
         {
-            Console.Write("Input method(file or console): ");
-            string OperationInput = Console.ReadLine();
-            if (OperationInput == "console")
+            do
             {
-                Console.Write("Input warehouse capacity: ");
-                Warehouse.Capacity = int.Parse(Console.ReadLine());
-                Console.Write("Input warehouse cost per container: ");
-                Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
-            }
-            else
-            if (OperationInput == "file")
-            {
-                Console.WriteLine("You may change the file 'WarehouseInfo.txt'");
-                Console.WriteLine("At WarehouseInfo: First line: Capacity of warehouse, second line: Cost per container");
-                Console.WriteLine("Example of file are in the folder 'FileInput', plz, change the FILE IN THE FOLDER and press enter.");
-                Console.ReadKey(true);
-                string[] WarehouseInfo = File.ReadAllLines($"FileInput{Path.DirectorySeparatorChar}WarehouseInfo.txt");
-                Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
-                Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
-            }
+                Console.Clear();
+                try
+                {
+                    Console.Write("Input method(file or console): ");
+                    string OperationInput = Console.ReadLine();
+                    if (OperationInput == "console")
+                    {
+                        Console.Write("Input warehouse capacity: ");
+                        Warehouse.Capacity = int.Parse(Console.ReadLine());
+                        Console.Write("Input warehouse cost per container: ");
+                        Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
+                    }
+                    else
+                    if (OperationInput == "file")
+                    {
+                        Console.WriteLine("You may change the file 'WarehouseInfo.txt'");
+                        Console.WriteLine("At WarehouseInfo: First line: Capacity of warehouse, second line: Cost per container");
+                        Console.WriteLine("Example of file are in the folder 'FileInput', plz, change the FILE IN THE FOLDER and press enter.");
+                        Console.ReadKey(true);
+                        string[] WarehouseInfo = File.ReadAllLines($"FileInput{Path.DirectorySeparatorChar}WarehouseInfo.txt");
+                        Warehouse.Capacity = int.Parse(WarehouseInfo[0]);
+                        Warehouse.CostPerContainer = double.Parse(WarehouseInfo[1]);
+                    }
+                }
+                catch
+                {
+                    Console.WriteLine("Incorrect Input!!!, press enter to try again..");
+                    Console.ReadKey(true);
+                }
+            } while (Warehouse.Capacity == 0);
 
         }
         static void Main(string[] args)
         {
+            Console.BackgroundColor = ConsoleColor.Black;
+            Console.ForegroundColor = ConsoleColor.White;
             bool ExitCode = false;
             InputWarehouseInfo();
             Menu.InitailizeMenu();
