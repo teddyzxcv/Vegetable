@@ -50,9 +50,16 @@ namespace Vegetable
             }
         }
 
-        static void DeleteContainer()
+        static void DeleteContainer(int delIndex)
         {
-
+            for (int i = 0; i < Warehouse.ContainerList.Count; i++)
+            {
+                if (Warehouse.ContainerList[i].Index == delIndex)
+                {
+                    Warehouse.ContainerList.RemoveAt(i);
+                    return;
+                }
+            }
         }
 
         static void PrintWarehouseInfo(List<Container> containers)
@@ -79,7 +86,8 @@ namespace Vegetable
             }
             else if (Operation == "-")
             {
-
+                int DelIndex = int.Parse(Console.ReadLine());
+                DeleteContainer(DelIndex);
             }
             else
                 throw new Exception();
@@ -105,7 +113,7 @@ namespace Vegetable
                         }
                         else if (OperationInfo[i] == "-")
                         {
-
+                            DeleteContainer(int.Parse(ContainerInfo[i]));
                         }
                         else
                             throw new Exception();
@@ -119,6 +127,13 @@ namespace Vegetable
             {
                 Console.WriteLine("Incorrect input!");
             }
+        }
+        static void InputWarehouseInfo()
+        {
+            Console.Write("Input warhouse capacity: ");
+            Warehouse.Capacity = int.Parse(Console.ReadLine());
+            Console.Write("Input warhouse cost per container: ");
+            Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
         }
         static void Main(string[] args)
         {
@@ -136,18 +151,13 @@ namespace Vegetable
                     else
                     if (OperationInput == "console")
                     {
-                        Console.Write("Input warhouse capacity: ");
-                        Warehouse.Capacity = int.Parse(Console.ReadLine());
-                        Console.Write("Input warhouse cost per container: ");
-                        Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
+                        if (Warehouse.Capacity != 0)
+                            InputWarehouseInfo();
                         do
                         {
                             ConsoleAddDelete();
                             Console.WriteLine("Press Enter to continue, press ESC to leave...");
                         } while (Console.ReadKey().Key != ConsoleKey.Escape);
-                    }
-                    else
-                    {
                     }
                 }
                 catch
