@@ -4,7 +4,12 @@ namespace Vegetable
 {
     public class Container
     {
-
+        /// <summary>
+        /// Initialize the container.
+        /// </summary>
+        /// <param name="damagelevel"></param>
+        /// <param name="maxmass"></param>
+        /// <param name="index"></param>
         public Container(double damagelevel, double maxmass, int index)
         {
             this.DamageLevel = damagelevel;
@@ -17,6 +22,10 @@ namespace Vegetable
         public List<Box> BoxList = new List<Box>();
 
         private double summass;
+        /// <summary>
+        ///  Find current mass of all box in the container.
+        /// </summary>
+        /// <value></value>
         public double CurrentMass
         {
             get
@@ -35,6 +44,10 @@ namespace Vegetable
 
         private double sumcost;
 
+        /// <summary>
+        ///  Find the sum of cost of all boxes in the container.
+        /// </summary>
+        /// <value></value>
         public double SumCost
         {
             get
@@ -49,7 +62,10 @@ namespace Vegetable
             }
         }
 
-
+        /// <summary>
+        /// Simple ToString method.
+        /// </summary>
+        /// <returns></returns>
 
         public override string ToString()
         {
@@ -62,9 +78,13 @@ namespace Vegetable
             }
             return Output;
         }
+        /// <summary>
+        /// Show case the info about the container.
+        /// </summary>
+        /// <returns></returns>
         public string ShowcaseMessage()
         {
-            return $">>>Sum cost: {this.SumCost}Rub; Damage Level: {this.DamageLevel / 100};\n>>>Maximum mass: {this.MaxMass}kg; Current mass: {this.CurrentMass}kg";
+            return $">>>Number of boxes: {this.BoxList.Count}; Sum cost: {this.SumCost}Rub; Damage Level: {this.DamageLevel / 100};\n>>>Maximum mass: {this.MaxMass}kg; Current mass: {this.CurrentMass}kg";
         }
 
 

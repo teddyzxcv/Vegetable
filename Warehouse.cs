@@ -10,12 +10,21 @@ namespace Vegetable
         static public int Capacity { get; set; }
 
         static public List<Container> ContainerList = new List<Container>();
+        /// <summary>
+        /// Converter use this method to turn list of container to list of string.
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         static public string CotainerToIndex(Container c)
         {
             return "Container N." + c.Index.ToString();
         }
 
-
+        /// <summary>
+        /// Check the cost with cost per container.
+        /// </summary>
+        /// <param name="container"></param>
+        /// <returns></returns>
         static public bool CheckCost(Container container)
         {
             if (container.SumCost <= CostPerContainer)
@@ -31,6 +40,7 @@ namespace Vegetable
             /// Max Mass
             /// Sum cost
             /// Damage Level
+            /// Sort by some parameters.
             switch (Parameter)
             {
                 case (0):
