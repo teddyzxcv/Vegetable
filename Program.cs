@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Globalization;
 namespace Vegetable
 {
     class Program
@@ -11,7 +12,7 @@ namespace Vegetable
         /// Add container to the warehouse.
         /// </summary>
         /// <param name="InputLine"></param>
-        /// <param name="index"></param>
+        /// <param name="index"></param
         public static void AddContainer(string InputLine, ref int index)
         {
 
@@ -208,12 +209,12 @@ namespace Vegetable
         /// <param name="args"></param>
         static void Main(string[] args)
         {
+            CultureInfo.CurrentCulture = new CultureInfo("en-US", false);
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
             bool ExitCode = false;
             InputWarehouseInfo();
             Menu.InitailizeMenu();
-
             do
             {
                 // Some menu tricks.

@@ -60,6 +60,10 @@ namespace Vegetable
             else
                 return true;
         }
+        /// <summary>
+        /// Sort all element by certain parameter.
+        /// </summary>
+        /// <param name="Parameter"></param>
 
         static public void SortBy(int Parameter)
         {
