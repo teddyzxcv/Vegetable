@@ -5,9 +5,37 @@ namespace Vegetable
 {
     public static class Warehouse
     {
-        static public double CostPerContainer { get; set; }
+        static private double costpercontainer;
+        static public double CostPerContainer
+        {
+            get
+            {
+                return costpercontainer;
+            }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception();
+                else
+                    costpercontainer = value;
+            }
+        }
+        static private int capacity;
 
-        static public int Capacity { get; set; }
+        static public int Capacity
+        {
+            get
+            {
+                return capacity;
+            }
+            set
+            {
+                if (value <= 0)
+                    throw new Exception();
+                else
+                    capacity = value;
+            }
+        }
 
         static public List<Container> ContainerList = new List<Container>();
         /// <summary>

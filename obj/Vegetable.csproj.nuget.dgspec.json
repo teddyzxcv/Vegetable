@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\Vegetable.csproj": {}
+    "C:\\Users\\teddyzxcv\\Documents\\VSCODE\\Vegetable (3)\\Vegetable.csproj": {}
   },
   "projects": {
-    "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\Vegetable.csproj": {
+    "C:\\Users\\teddyzxcv\\Documents\\VSCODE\\Vegetable (3)\\Vegetable.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\Vegetable.csproj",
+        "projectUniqueName": "C:\\Users\\teddyzxcv\\Documents\\VSCODE\\Vegetable (3)\\Vegetable.csproj",
         "projectName": "Vegetable",
-        "projectPath": "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\Vegetable.csproj",
+        "projectPath": "C:\\Users\\teddyzxcv\\Documents\\VSCODE\\Vegetable (3)\\Vegetable.csproj",
         "packagesPath": "C:\\Users\\teddyzxcv\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\teddyzxcv\\Documents\\GitHub\\Vegetable\\obj\\",
+        "outputPath": "C:\\Users\\teddyzxcv\\Documents\\VSCODE\\Vegetable (3)\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\"

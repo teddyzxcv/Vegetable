@@ -16,9 +16,16 @@ namespace Vegetable
         /// <param name="costperkilo"></param>
         public Box(double mass, double costperkilo)
         {
-            this.Mass = mass;
-            this.CostPerKilo = costperkilo;
-            this.SumCost = mass * costperkilo;
+            if (mass > 0 && costperkilo > 0)
+            {
+                this.Mass = mass;
+                this.CostPerKilo = costperkilo;
+                this.
+                SumCost = mass * costperkilo;
+            }
+            else
+                throw new Exception();
+
         }
         /// <summary>
         /// Simple box ToString method to make program better.

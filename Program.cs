@@ -14,6 +14,7 @@ namespace Vegetable
         /// <param name="index"></param>
         public static void AddContainer(string InputLine, ref int index)
         {
+
             try
             {
                 // Set container infomation.
@@ -31,6 +32,8 @@ namespace Vegetable
                         throw new Exception();
                     double boxmass = double.Parse(BoxListInfo[i].Split(',')[0]);
                     double boxcost = double.Parse(BoxListInfo[i].Split(',')[1]);
+                    if (boxmass <= 0 || boxcost <= 0 || SumNumber <= 0)
+                        throw new Exception();
                     Box box = new Box(boxmass, boxcost);
                     container.BoxList.Add(box);
                     // Check container mass.

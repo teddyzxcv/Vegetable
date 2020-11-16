@@ -24,3 +24,16 @@ C:\Users\pan26\Documents\GitHub\Vegetable\obj\Debug\netcoreapp3.1\Vegetable.cspr
 C:\Users\pan26\Documents\GitHub\Vegetable\obj\Debug\netcoreapp3.1\Vegetable.dll
 C:\Users\pan26\Documents\GitHub\Vegetable\obj\Debug\netcoreapp3.1\Vegetable.pdb
 C:\Users\pan26\Documents\GitHub\Vegetable\obj\Debug\netcoreapp3.1\Vegetable.genruntimeconfig.cache
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\bin\Debug\netcoreapp3.1\Vegetable.exe
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\bin\Debug\netcoreapp3.1\Vegetable.deps.json
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\bin\Debug\netcoreapp3.1\Vegetable.runtimeconfig.json
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\bin\Debug\netcoreapp3.1\Vegetable.runtimeconfig.dev.json
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\bin\Debug\netcoreapp3.1\Vegetable.dll
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\bin\Debug\netcoreapp3.1\Vegetable.pdb
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\obj\Debug\netcoreapp3.1\Vegetable.csprojAssemblyReference.cache
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\obj\Debug\netcoreapp3.1\Vegetable.AssemblyInfoInputs.cache
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\obj\Debug\netcoreapp3.1\Vegetable.AssemblyInfo.cs
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\obj\Debug\netcoreapp3.1\Vegetable.csproj.CoreCompileInputs.cache
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\obj\Debug\netcoreapp3.1\Vegetable.dll
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\obj\Debug\netcoreapp3.1\Vegetable.pdb
+C:\Users\teddyzxcv\Documents\VSCODE\Vegetable (3)\obj\Debug\netcoreapp3.1\Vegetable.genruntimeconfig.cache
