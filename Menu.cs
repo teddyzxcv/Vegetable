@@ -15,6 +15,9 @@ namespace Vegetable
         public static List<string> SortByList = new List<string>() { "Index(add order)", "Current mass", "Max Mass", "Sum cost", "Damage level" };
 
         public static int CurrentSortBy = 0;
+        /// <summary>
+        /// Let the menu initailize.
+        /// </summary>
         public static void InitailizeMenu()
         {
             MenuEndPoint = false;
@@ -24,7 +27,11 @@ namespace Vegetable
             Console.BackgroundColor = ConsoleColor.Black;
             Menu.CurrentMenuList = Warehouse.ContainerList.ConvertAll(new Converter<Container, string>(Warehouse.CotainerToIndex));
         }
-
+        /// <summary>
+        /// Print the main menu.
+        /// </summary>
+        /// <param name="ShowCaseMessage"></param>
+        /// <param name="ErrorMessage"></param>
         public static void PrintOutUpAndDown(string ShowCaseMessage, string ErrorMessage)
         {
             Console.WriteLine(OutMenuList[OutMenuChoosenOne]);
@@ -52,7 +59,7 @@ namespace Vegetable
             Console.WriteLine("A - add container, D - delete CHOOSEN container \nF - Read operaion and container info from file in the folder 'FileInput', S - Sort by menu");
             Console.WriteLine("Press ESC to exit program...");
             Console.WriteLine("Right arrow - Get in, Left arrow - get out, Up and Down arrow - Menu choose");
-
+            // Some color change.
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine(ShowCaseMessage);
@@ -60,7 +67,9 @@ namespace Vegetable
             Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine(ErrorMessage);
         }
-
+        /// <summary>
+        /// Get all info of target menu to the current menu.
+        /// </summary>
         public static void GetInToMenu()
         {
             switch (OutMenuChoosenOne)
@@ -85,6 +94,10 @@ namespace Vegetable
             }
 
         }
+        /// <summary>
+        /// Control the menu using keyboard.
+        /// </summary>
+        /// <param name="ExitCode"></param>
 
         public static void MenuControl(out bool ExitCode)
         {
@@ -110,6 +123,7 @@ namespace Vegetable
                             InMenuChoosenOne++;
                     break;
                 case (ConsoleKey.RightArrow):
+                    // Get in to the choosen menu.
                     if (OutMenuChoosenOne < OutMenuList.Count - 1 && CurrentMenuList.Count != 0)
                     {
                         if (!MenuEndPoint)
@@ -130,6 +144,7 @@ namespace Vegetable
 
                     break;
                 case (ConsoleKey.LeftArrow):
+                    // Get out from current menu.
                     if (OutMenuChoosenOne != 0 && CurrentMenuList.Count != 0)
                     {
                         if (OutMenuChoosenOne != 2)
@@ -147,10 +162,11 @@ namespace Vegetable
                     }
                     break;
                 case (ConsoleKey.Escape):
+                    // Escape.
                     ExitCode = true;
                     break;
-
                 case (ConsoleKey.A):
+                    // Example.
                     Console.WriteLine("Example:        2->2,3;4,10 ");
                     Console.WriteLine("                ^  ^ ^ ^-^");
                     Console.WriteLine("                |  | |  |");
@@ -163,12 +179,14 @@ namespace Vegetable
                     CurrentMenuList = Warehouse.ContainerList.ConvertAll(new Converter<Container, string>(Warehouse.CotainerToIndex));
                     break;
                 case (ConsoleKey.D):
+                    // Delete Container.
                     Program.DeleteContainer(Warehouse.ContainerList[InMenuChoosenOne].Index);
                     CurrentMenuList = Warehouse.ContainerList.ConvertAll(new Converter<Container, string>(Warehouse.CotainerToIndex));
                     if (InMenuChoosenOne != 0)
                         InMenuChoosenOne--;
                     break;
                 case (ConsoleKey.F):
+                    // Input all form file.
                     Program.FileAddDelete();
                     CurrentMenuList = Warehouse.ContainerList.ConvertAll(new Converter<Container, string>(Warehouse.CotainerToIndex));
                     break;

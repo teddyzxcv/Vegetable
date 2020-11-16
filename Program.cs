@@ -8,10 +8,16 @@ namespace Vegetable
         public static string ErrorMessage;
         static int ContainerExcluded = 0;
 
+        /// <summary>
+        /// Add container to the warehouse.
+        /// </summary>
+        /// <param name="InputLine"></param>
+        /// <param name="index"></param>
         public static void AddContainer(string InputLine, ref int index)
         {
             try
             {
+                // Set container infomation.
                 int BoxExcluded = 0;
                 Random rn = new Random();
                 string[] InputInfo = InputLine.Split("->");
@@ -28,6 +34,7 @@ namespace Vegetable
                     double boxcost = double.Parse(BoxListInfo[i].Split(',')[1]);
                     Box box = new Box(boxmass, boxcost);
                     container.BoxList.Add(box);
+                    // Check container mass.
                     if (!(container.CurrentMass < container.MaxMass))
                     {
 
@@ -45,6 +52,7 @@ namespace Vegetable
                     }
 
                 }
+                // Check box in the container.
                 index += 1;
                 container.Index = index;
                 if (BoxExcluded != 0)
@@ -52,17 +60,21 @@ namespace Vegetable
                         ErrorMessage += $"Can't add more box in the Container N.{index}, because limit of container was reached,\n {BoxExcluded} boxes wasn't put into the container.\n";
                     else
                         ErrorMessage += $"Can't add Container N.{index}, because no box can't be add into the container(they are all so heavy).\n";
+                // Check warehouse add time. To remove in case reach the limit of warehouse.
                 if (Warehouse.Capacity == Warehouse.ContainerList.Count)
                 {
                     Warehouse.SortBy(0);
                     Warehouse.ContainerList.RemoveAt(0);
                     ContainerExcluded++;
                     Warehouse.SortBy(Menu.CurrentSortBy);
+                    if (Warehouse.CheckCost(container))
+                        Warehouse.ContainerList.Add(container);
                 }
+                else
+                // Check cost of container.
                 if (Warehouse.CheckCost(container))
                     Warehouse.ContainerList.Add(container);
                 else
-                if (BoxExcluded != SumNumber)
                     ErrorMessage += $"Container N.{index} can't put into the warehouse, because cost of container is less than cost of rent in warehouse\n";
 
 
@@ -72,7 +84,10 @@ namespace Vegetable
                 ErrorMessage = "Incorrect console input!!!";
             }
         }
-
+        /// <summary>
+        /// Delete Container from warehouse.
+        /// </summary>
+        /// <param name="delIndex"></param>
         public static void DeleteContainer(int delIndex)
         {
             for (int i = 0; i < Warehouse.ContainerList.Count; i++)
@@ -87,10 +102,14 @@ namespace Vegetable
 
         public static int ContainerIndex = 0;
 
+        /// <summary>
+        /// Make file add and delete.
+        /// </summary>
         public static void FileAddDelete()
         {
             try
             {
+                // Instruction.
                 Console.WriteLine("At Operation Info: For each line: '+' to add a container,'-' to delete a container");
                 Console.WriteLine("At Container Info: For each line: if line in 'OperationInfo' are '+', then info of container must write in format:");
                 Console.WriteLine("Example:        2->2,3;4,10 ");
@@ -102,6 +121,7 @@ namespace Vegetable
                 Console.WriteLine("Other boxes in the same format");
                 Console.WriteLine("if line are '-', then just the N. of container that need to delete. All line and opertation must correspond each other.");
                 Console.WriteLine("In the folder 'FileInput' has all example.");
+                // Input path info.
                 Console.Write("Plz, input path with operation info: ");
                 string[] OperationInfo = File.ReadAllLines(Console.ReadLine());
                 Console.Write("Plz, input path with container info: ");
@@ -134,6 +154,9 @@ namespace Vegetable
                 ErrorMessage = "Incorrect file input!!!";
             }
         }
+        /// <summary>
+        /// Input warehouse info at start.
+        /// </summary>
         static void InputWarehouseInfo()
         {
             do
@@ -141,8 +164,10 @@ namespace Vegetable
                 Console.Clear();
                 try
                 {
+                    // Input method.
                     Console.Write("Input method(file or console): ");
                     string OperationInput = Console.ReadLine();
+                    // Console input.
                     if (OperationInput == "console")
                     {
                         Console.Write("Input warehouse capacity: ");
@@ -151,6 +176,7 @@ namespace Vegetable
                         Warehouse.CostPerContainer = double.Parse(Console.ReadLine());
                     }
                     else
+                    // File input.
                     if (OperationInput == "file")
                     {
                         Console.WriteLine("You must input path of txt file with these infomation:");
@@ -174,6 +200,10 @@ namespace Vegetable
             } while (Warehouse.Capacity == 0);
 
         }
+        /// <summary>
+        /// That is where all began.
+        /// </summary>
+        /// <param name="args"></param>
         static void Main(string[] args)
         {
             Console.BackgroundColor = ConsoleColor.Black;
@@ -184,6 +214,7 @@ namespace Vegetable
 
             do
             {
+                // Some menu tricks.
                 Console.Clear();
                 try
                 {
@@ -194,6 +225,7 @@ namespace Vegetable
                         ShowCase = "";
                     Menu.PrintOutUpAndDown(ShowCase, ErrorMessage);
                     ErrorMessage = "";
+                    // Control the menu.
                     Menu.MenuControl(out ExitCode);
                 }
                 catch
