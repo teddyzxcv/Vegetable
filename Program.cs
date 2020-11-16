@@ -70,6 +70,10 @@ namespace Vegetable
                         Warehouse.ContainerList.Add(container);
                 }
                 else
+<<<<<<< HEAD
+=======
+                // Check cost of container.
+>>>>>>> 282ea227504ffd7e9cdc9dfbf8cfae7648a96a7f
                 if (Warehouse.CheckCost(container))
                     Warehouse.ContainerList.Add(container);
                 else
